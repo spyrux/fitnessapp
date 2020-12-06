@@ -1,0 +1,24 @@
+{
+  "name": "fitnessapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/spyrux/fitnessapp.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/spyrux/fitnessapp/issues"
+  },
+  "homepage": "https://github.com/spyrux/fitnessapp#readme",
+  "dependencies": {
+    "graphql-yoga": "^1.18.3",
+    "mongoose": "^5.11.4"
+  }
+}
