@@ -1,20 +1,20 @@
-const { GraphQLServer } = require('graphql-yoga')
+const { ApolloServer } = require('apollo-server');
+const gql = require('graphql-tag');
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/test', {useNewUrlParser: true});
-const typeDefs = `
+const { MONGODB } = require('./config.js');
+
+const typeDefs = gql`
   type Query {
     hello(name: String): String!
   }
+  
 `
 
-const Workout = mongoose.model('Workout', workoutSchema);
 
-var userSchema = Schema({
-    _id     : Number,
-    workouts : [{ref:workout}]
-});
 
-var workout = Schema({ exercise: String, weight: Number});
+
+
+
 
 const resolvers = {
   Query: {
@@ -22,11 +22,19 @@ const resolvers = {
   },
 }
 
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  // we're connected!
+
+
+const server = new ApolloServer({
+  typeDefs,
+  resolvers
 });
 
-const server = new GraphQLServer({ typeDefs, resolvers })
-server.start(() => console.log('Server is running on localhost:4000'))
+
+mongoose
+.connect( MONGODB, {useNewUrlParser: true})
+  .then(() =>{
+  return server.listen( {port: 5000})})
+  .then((res) =>{
+    console.log('Server running at ${res.url}');
+});
+
